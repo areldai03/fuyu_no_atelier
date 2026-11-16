@@ -72,7 +72,7 @@ body.storybook-active .modal-minor{background:#f8edda;border-color:#a27d58;color
 .storybook-toast.show{opacity:1;transform:translate(-50%,0)}
 .storybook-viewport.night-viewing .storybook-art:before{filter:blur(18px) brightness(.38)}
 .storybook-viewport.night-viewing .storybook-light-hotspot{pointer-events:none}
-.storybook-viewport.night-viewing .storybook-wordmark,.storybook-viewport.night-viewing .storybook-tools-trigger,.storybook-viewport.night-viewing .storybook-ribbon,.storybook-viewport.night-viewing .storybook-palette,.storybook-viewport.night-viewing .storybook-caption{opacity:0;pointer-events:none}
+.storybook-viewport.night-viewing .storybook-wordmark,.storybook-viewport.night-viewing .storybook-tools-trigger,.storybook-viewport.night-viewing .storybook-ribbon,.storybook-viewport.night-viewing .storybook-caption{opacity:0;pointer-events:none}
 .storybook-viewport.night-viewing .storybook-gift{pointer-events:none}
 .storybook-viewport.night-viewing .storybook-snow{opacity:.35}
 body.storybook-active .gift-modal,body.storybook-active .confirm-modal{border:9px solid #e8d2af;outline:3px solid #784837;background:#f2e7d0;color:#49382c;box-shadow:0 18px 60px #0b1925cc,inset 0 0 25px #c59e6d55}
@@ -102,3 +102,12 @@ body.storybook-active .book-illustration{height:clamp(185px,24vw,280px)}
  .storybook-caption{bottom:max(7px,env(safe-area-inset-bottom));padding:4px 8px;font-size:11px}
 }
 @media(prefers-reduced-motion:reduce){.storybook-snow i{animation:none;display:none}.storybook-tools-trigger,.storybook-panel,.storybook-toast{transition:none}}
+
+.storybook-ribbon{top:clamp(80px,7vw,110px);left:clamp(18px,3vw,50px);transform:none}
+.storybook-caption{left:clamp(105px,10vw,160px)}
+.storybook-mode-indicator{display:grid;place-items:center;width:clamp(44px,4.5vw,62px);height:clamp(44px,4.5vw,62px);border-radius:9px;background:#e7c98e;border:1px solid #956b43;color:#604338;font:30px/1 Georgia,serif}
+.storybook-panel-palette{display:flex;flex-wrap:wrap;gap:10px;padding:8px 2px}
+.storybook-panel .storybook-panel-palette .storybook-swatch{width:32px;height:32px;min-width:32px;padding:0;border:2px solid #fef8e6;border-radius:50%;background:var(--swatch);box-shadow:0 0 0 1px #7b5d48}
+.storybook-panel .storybook-panel-palette .storybook-swatch[aria-pressed=true]{box-shadow:0 0 0 3px #3b4c43,0 0 0 5px #fff1d7}
+.storybook-panel [data-story-mode][aria-pressed=true]{background:#e7c98e;border-color:#956b43}
+@media(max-width:720px){.storybook-ribbon{top:61px;left:17px}.storybook-mode-indicator{width:42px;height:42px;font-size:23px}}

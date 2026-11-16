@@ -37,24 +37,21 @@
           <div class="storybook-snow" id="storybookSnow" aria-hidden="true"></div>
           <header class="storybook-top">
             <button class="storybook-wordmark" id="storybookHome" aria-label="ホームに戻る">✧ 冬のアトリエ</button>
-            <div class="storybook-top-actions"><button class="storybook-sound-trigger" id="storybookSound" aria-label="音を消す" aria-pressed="true">音を消す</button><button class="storybook-night-trigger" id="storybookNight" aria-label="夜の灯りを見る" aria-pressed="false">夜の灯りを見る</button><button class="storybook-tools-trigger" id="storybookTools" aria-label="道具をひらく" aria-controls="storybookPanel" aria-expanded="false">道具をひらく</button></div>
+            <div class="storybook-top-actions"><button class="storybook-sound-trigger" id="storybookSound" aria-label="音を消す" aria-pressed="true">音を消す</button><button class="storybook-night-trigger" id="storybookNight" aria-label="夜の灯りを見る" aria-pressed="false">夜の灯りを見る</button><button class="storybook-tools-trigger" id="storybookTools" aria-label="道具を開く" aria-controls="storybookPanel" aria-expanded="false">道具をひらく</button></div>
           </header>
-          <div class="storybook-ribbon" role="group" aria-label="制作の道具">
-            <button class="storybook-tool" data-story-mode="paint" aria-label="色を塗る" aria-pressed="true">✎<small>色を塗る</small></button>
-            <button class="storybook-tool" data-story-mode="ornament" aria-label="灯りを飾る" aria-pressed="false">✦<small>灯りを飾る</small></button>
-            <button class="storybook-tool" data-story-mode="snowman" aria-label="雪だるまを置く" aria-pressed="false">☃<small>雪だるまを置く</small></button>
-            <button class="storybook-tool" data-story-mode="erase" aria-label="色や飾りを消す" aria-pressed="false">⌫<small>色や飾りを消す</small></button>
+          <div class="storybook-ribbon" id="storybookRibbon" role="group" aria-label="現在の道具と取り消し">
+            <span class="storybook-mode-indicator" id="storybookModeIndicator" role="status" aria-label="現在の道具: 色を塗る">✎</span>
             <button class="storybook-tool storybook-undo" id="storybookUndoQuick" aria-label="ひとつ戻す">↶<small>ひとつ戻す</small></button>
           </div>
-          <div class="storybook-palette" id="storybookPalette" role="group" aria-label="色を選ぶ"></div>
           <p class="storybook-caption" id="storybookCaption">ひとつずつ、冬を飾ろう。</p>
-          <aside class="storybook-panel" id="storybookPanel" aria-label="制作の道具" aria-hidden="true" inert>
+          <aside class="storybook-panel" id="storybookPanel" aria-label="道具" aria-hidden="true" inert>
             <div class="storybook-panel-head"><h2>冬をつくる道具</h2><button class="storybook-panel-close" id="storybookPanelClose" aria-label="道具を閉じる">×</button></div>
+            <h3>ツリーを飾る</h3><div class="storybook-panel-grid"><button data-story-mode="paint" aria-pressed="true">✎ 色を塗る</button><button data-story-mode="ornament" aria-pressed="false">✦ 灯りを飾る</button><button data-story-mode="snowman" aria-pressed="false">☃ 雪だるま</button><button data-story-mode="erase" aria-pressed="false">⌫ 消しゴム</button></div>
+            <h3>色を選ぶ</h3><div class="storybook-panel-palette" id="storybookPalette" role="group" aria-label="色を選ぶ"></div>
             <label for="storybookBrush">筆の太さ <span id="storybookBrushValue">34</span></label><input id="storybookBrush" type="range" min="18" max="70" value="34">
-            <h3>雪の庭</h3><div class="storybook-panel-grid"><button id="storybookSnowToggle">雪を止める</button><button id="storybookSnowman">雪だるまを置く</button></div>
+            <h3>雪の庭</h3><div class="storybook-panel-grid"><button id="storybookSnowToggle" class="wide">雪を止める</button></div>
             <h3>作品を残す</h3><div class="storybook-panel-grid">
-              <button id="storybookUndo">ひとつ戻す</button>
-              <button id="storybookReset">白紙に戻す</button><button id="storybookExport" class="wide">画像を保存</button>
+              <button id="storybookReset">白紙に戻す</button><button id="storybookExport">画像を保存</button>
             </div><h3>三つのプレゼント</h3><div class="storybook-panel-grid"><button data-panel-gift="game">左のプレゼント</button><button data-panel-gift="book">真ん中のプレゼント</button><button data-panel-gift="letter" class="wide">右のプレゼント</button></div>
             <p>ツリーをなぞって色を重ね、灯りを添えてください。雪だるまは足もとの庭に置けます。</p>
           </aside>
@@ -256,7 +253,7 @@
     viewport.classList.toggle('night-viewing',on);
     paint.style.pointerEvents=on?'none':'auto';
     art.querySelectorAll('[data-light-id]').forEach(button=>button.inert=on);
-    for(const selector of ['.storybook-ribbon','.storybook-palette','#storybookHome','#storybookTools'])$(selector).inert=on;
+    for(const selector of ['.storybook-ribbon','#storybookHome','#storybookTools'])$(selector).inert=on;
     $('#storybookNight').setAttribute('aria-pressed',String(on));
     $('#storybookNight').textContent=on?'制作に戻る':'夜の灯りを見る';
     $('#storybookNight').setAttribute('aria-label',on?'制作に戻る':'夜の灯りを見る');
@@ -265,6 +262,9 @@
   function setMode(next){
     mode=next;
     document.querySelectorAll('[data-story-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.storyMode===next)));
+    const current={paint:['✎','色を塗る'],ornament:['✦','灯りを飾る'],snowman:['☃','雪だるまを置く'],erase:['⌫','消しゴム']}[next];
+    $('#storybookModeIndicator').textContent=current[0];
+    $('#storybookModeIndicator').setAttribute('aria-label',`現在の道具: ${current[1]}`);
     $('#storybookCaption').textContent={paint:'ツリーをなぞると、枝に色が宿ります。',ornament:'ツリーをタップして、灯りをともそう。',erase:'色を薄く、飾りはタップで外せます。',snowman:'手前の雪の地面をタップしてね。'}[next];
     paint.style.cursor=next==='paint'||next==='erase'?'crosshair':'pointer';
     closePanel();
@@ -446,8 +446,7 @@
   $('#storybookTools').onclick=()=>$('#storybookPanel').classList.contains('open')?closePanel():openPanel();
   $('#storybookPanelClose').onclick=closePanel;
   $('#storybookSnowToggle').onclick=()=>setSnow(!state.snow);
-  $('#storybookSnowman').onclick=()=>setMode('snowman');
-  $('#storybookUndo').onclick=undo;$('#storybookUndoQuick').onclick=undo;$('#storybookReset').onclick=reset;
+  $('#storybookUndoQuick').onclick=undo;$('#storybookReset').onclick=reset;
   $('#storybookExport').onclick=exportImage;
   document.querySelectorAll('[data-story-gift]').forEach(b=>b.onclick=()=>openGift(b.dataset.storyGift));
   document.querySelectorAll('[data-panel-gift]').forEach(b=>b.onclick=()=>openGift(b.dataset.panelGift));
