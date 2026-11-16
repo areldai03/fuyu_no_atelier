@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#102522">
+  <meta name="description" content="雪の森で見つけたまっ白なツリー。枝に色を重ね、灯りをともして、冬の物語をつくる絵本のアトリエ。">
+  <title>冬のアトリエ ─ 雪の夜、一本のクリスマスツリー。</title>
+  <link rel="stylesheet" href="main.css?v=10">
+  <link rel="stylesheet" href="storybook.css?v=13">
+</head>
+<body>
+  <main>
+    <section class="home" id="home" aria-labelledby="homeTitle">
+      <div class="home-art" role="img" aria-label="雪の森の静かな夜。手描きの大きなクリスマスツリーが金色に輝いている"></div>
+      <div class="home-shade"></div>
+      <canvas id="homeSnow" class="home-snow" aria-hidden="true"></canvas>
+      <div class="home-logo">冬のアトリエ</div>
+      <div class="home-content">
+        <h1 id="homeTitle">雪の夜、<br>一本の<span class="home-title-mobile-break"><br></span>クリスマスツリー。</h1>
+        <p><strong>星の傘をさした子が、まっ白な木を見つけました。</strong><br>あなたのひと筆から、ツリーを彩りましょう。</p>
+        <button class="enter-button" id="enterButton" aria-label="ページをめくって冬のアトリエへ">
+          <span class="enter-label">ページをめくる</span>
+          <span class="enter-arrow" aria-hidden="true">→</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="studio" id="studio" aria-label="クリスマスツリー制作画面" inert></section>
+  </main>
+
+  <dialog id="giftDialog" class="modal gift-modal" aria-labelledby="giftHeading"><div class="modal-top"><span class="eyebrow" id="giftEyebrow">ちいさな贈りもの</span><button class="close-button" data-close-dialog aria-label="閉じる">×</button></div><div id="giftContent"></div></dialog>
+
+
+  <dialog id="confirmDialog" class="modal confirm-modal" aria-labelledby="confirmHeading"><div class="modal-top"><span class="eyebrow">もう一度はじめる</span><button class="close-button" data-close-dialog aria-label="閉じる">×</button></div><div class="confirm-body"><h2 id="confirmHeading">はじめから作り直しますか？</h2><p id="confirmDescription">塗った色や飾り、雪だるまも消えて、新しいツリーがはじまります。</p><div class="confirm-actions"><button class="modal-minor" id="cancelReset">やめる</button><button class="modal-primary" id="confirmReset">作り直す</button></div></div></dialog>
+
+  <script src="content.js?v=9"></script>
+  <script src="sound.js?v=4"></script>
+  <script src="app.js?v=10"></script>
+  <script src="assets/tree-mask-data.js?v=1"></script>
+  <script src="storybook.js?v=21"></script>
+</body>
+</html>
